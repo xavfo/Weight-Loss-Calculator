@@ -1,4 +1,6 @@
 //WLC
+document.getElementById('results').style.display = 'none';
+document.getElementById('backbuttons').style.display = 'none';
 
 	function checkreqs() {
 
@@ -141,6 +143,7 @@ document.getElementById('submit').onclick = function(){
 	
 	document.getElementById('input').style.display = 'none';
 	document.getElementById('results').style.display = 'block';
+	document.getElementById('backbuttons').style.display = 'block';
 }
 };
 

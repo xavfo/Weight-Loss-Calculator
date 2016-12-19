@@ -124,9 +124,12 @@
 </div>
 
 <!--results are created in div below-->
-<div id="results"></div>
+<div id="results">
+</div>
+<div id="backbuttons">
 <button id="back">Back</button>
 <button id="reset">Reset</button>
+</div>
 
 
 
