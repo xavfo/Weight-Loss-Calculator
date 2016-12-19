@@ -1,10 +1,23 @@
 //WLC
 
+	function checkreqs() {
+
+	var reqs = document.getElementsByClassName('req');
+	for (var i = 0; i < reqs.length; i++) {
+		if ( reqs[i].value === '') {
+			return false;
+		}
+	}
+return true;
+}
 
 document.getElementById('submit').onclick = function(){
 
-	//get inputs and store in variables
-	
+	if (!checkreqs()) {
+		alert('Please fill in all the required fields.');
+	} else {
+
+
 	//required
 	var gender = "female"; //document.getElementsByName('gender');
 
@@ -106,6 +119,7 @@ document.getElementById('submit').onclick = function(){
 	
 	document.getElementById('input').style.display = 'none';
 	document.getElementById('results').style.display = 'block';
+}
 };
 
 //reloads everything
