@@ -144,6 +144,11 @@ document.getElementById('submit').onclick = function(){
 }
 };
 
+document.getElementById('back').onclick = function() {
+	document.getElementById('input').style.display = 'block';
+	document.getElementById('results').style.display = 'none';
+};
+
 //reloads everything
 document.getElementById('reset').onclick = function(){
   history.go(0);

@@ -46,21 +46,21 @@
 			<div class="formelement">
 			<!--age number input-->
 			Age
-			<input type="number" id="age" name="age">Years
+			<input class="req" type="number" id="age" name="age">Years
 			</div>
 
 			<div class="formelement">
 			<!--weight number input-->
 			Weight
-			<input type="number" id="lbs" name="lbs">Lbs
+			<input class="req" type="number" id="lbs" name="lbs">Lbs
 			</div>
 
 			<div class="formelement">
 			<!--height feet input-->
 			Height
-			<input type="number" id="feet" name="feet">Feet
+			<input class="req" type="number" id="feet" name="feet">Feet
 			<!--height inches input-->
-			<input type="number" id="inches" name="inches">Inches
+			<input class="req" type="number" id="inches" name="inches">Inches
 			</div>
 
 			<div class="formelement">
@@ -116,26 +116,6 @@
 				<option value="large">Large</option>
 			</select>
 			</div>
-		
-			<div class="formelement">
-			<!--macro ratios dropdown-->
-			Macro Ratios
-			<select id="macroratios" name="macroratios">
-				<option value="lowfat">Low Fat</option>
-				<option value="moderate" selected="">Moderate</option>
-				<option value="lowcarb">Low Carb</option>
-				<option value="ketogenic">Ketogenic</option>
-			</select>
-			</div>
-
-			<div class="formelement"><!--calorie variation dropdown-->
-			Calorie Variation Options
-			<select id="calorievariation" name="calorievariation">
-				<option value="none" selected>None</option>
-				<option value="zigzig">Zig Zag Diet</option>
-				<option value="5:2">5:2 Diet</option>
-			</select>
-			</div>
 			
 			</form>
 		</div>
@@ -145,7 +125,7 @@
 
 <!--results are created in div below-->
 <div id="results"></div>
-
+<button id="back">Back</button>
 <button id="reset">Reset</button>
 
 
