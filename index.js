@@ -42,33 +42,31 @@ document.getElementById('submit').onclick = function(){
 	var framesize = document.getElementById('framesize').value;
 
 
-	//check for blanks, if blank alert
-
-
-	//calculate results and store in variables
-
 	var height = (Number(feet) * 12) + Number(inches);
-
-	var idealweightlow = (18.5 * (height * height)) / 703; //lower limit healthy bmi
-	var idealweighthigh = (25 * (height * height)) / 703; //upper limit healthy bmi
-	var BMI = (weight / (height * height)) * 703;
 	
-	var adjustedbmi;
+	var frame1; // for calculating adjusted bmi
+	var frame2; // for calculating adjusted goalbmi and ideal weight range
 
-// TODO what and how will adjustedbmi affect results?
-
-	switch(framesize) {
-		case 0.9:
-			adjustedbmi = BMI * 1.1;
+		switch(framesize) {
+		case 'small':
+			frame1 = 1.1;
+			frame2 = 0.9;
 			break;
-		case 1.1:
-			adjustedbmi = BMI * 0.9;
+		case 'large':
+			frame1 = 0.9;
+			frame2 = 1.1;
 			break;
 		default:
-			adjustedbmi = BMI;
+			frame1 = 1;
+			frame2 = 1;
 	}
 
-	var goalBMIresult = (goalBMI * (height * height)) / 703;
+	var BMI = ((weight / (height * height)) * 703) * frame1;
+
+	var goalBMIresult = ((goalBMI * (height * height)) / 703) * frame2;
+
+	var idealweightlow = ((18.5 * (height * height)) / 703) * frame2; //lower limit healthy bmi
+	var idealweighthigh = ((25 * (height * height)) / 703) * frame2; //upper limit healthy bmi
 
 	var BMR;
 	if (gender == "male") {
@@ -111,6 +109,8 @@ document.getElementById('submit').onclick = function(){
 	
 	//optionals 
 
+
+
 	//goalBMI
 	var goalBMIresults;
 	if (goalBMI === '') {
@@ -150,6 +150,7 @@ document.getElementById('submit').onclick = function(){
 document.getElementById('back').onclick = function() {
 	document.getElementById('input').style.display = 'block';
 	document.getElementById('results').style.display = 'none';
+	document.getElementById('backbuttons').style.display = 'none';
 };
 
 //reloads everything
