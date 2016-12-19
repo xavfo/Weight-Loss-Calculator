@@ -1,15 +1,5 @@
 //WLC
 
-function writedate(dateinput) {
-  
-  var date = dateinput.getDate();
-  var month = dateinput.getMonth() + 1;
-  var year = dateinput.getFullYear();
-  
-  var date = date + '/' + month + '/' + year;
-  return date;
-  
-} 
 
 document.getElementById('submit').onclick = function(){
 
@@ -18,25 +8,23 @@ document.getElementById('submit').onclick = function(){
 	//required
 	var gender = "female"; //document.getElementsByName('gender');
 
-	var age = 26; //document.getElementById('age').value;
-	var weight = 119; //document.getElementById('lbs').value;
-	var feet = 5; //document.getElementById('feet').value;
-	var inches = 2; //document.getElementById('inches').value;
+	var age = document.getElementById('age').value;
+	var weight = document.getElementById('lbs').value;
+	var feet = document.getElementById('feet').value;
+	var inches = document.getElementById('inches').value;
 
-	var activitylevel = 1.2; //document.getElementById('activitylevel').value;
+	var activitylevel = document.getElementById('activitylevel').value;
 
 
 	//optional
-	var intendedcals = 1000; //document.getElementById('intendedcals').value;
+	var intendedcals = document.getElementById('intendedcals').value;
 	
 	// TODO how to handle dates?
 	var finishdate = new Date(document.getElementById('finishdate').value);
 
-	var goalweight = 99; //document.getElementById('goalweight').value;
-	var goalBMI = 19; //document.getElementById('goalBMI').value;
-	var framesize = "average"; //document.getElementById('framesize').value;
-	//var macroratios = document.getElementById('macroratios').value;
-	//var calorievariation = document.getElementById('calorievariation').value;
+	var goalweight = document.getElementById('goalweight').value;
+	var goalBMI = document.getElementById('goalBMI').value;
+	var framesize = document.getElementById('framesize').value;
 
 
 	//check for blanks, if blank alert
@@ -44,11 +32,11 @@ document.getElementById('submit').onclick = function(){
 
 	//calculate results and store in variables
 
-	var height = feet * 12 + inches;
+	var height = (Number(feet) * 12) + Number(inches);
 
-	var idealweightlow = ((18.5 * (height * height)) / 703); //lower limit healthy bmi
-	var idealweighthigh = ((25 * (height * height)) / 703); //upper limit healthy bmi
-	var BMI = ((weight / (height * height)) * 703);
+	var idealweightlow = (18.5 * (height * height)) / 703; //lower limit healthy bmi
+	var idealweighthigh = (25 * (height * height)) / 703; //upper limit healthy bmi
+	var BMI = (weight / (height * height)) * 703;
 	
 	var adjustedbmi;
 
@@ -96,21 +84,21 @@ document.getElementById('submit').onclick = function(){
 
   	var calstoreachgoal = 1500 - (((weight - goalweight) * 3500) / daystofinishdate);
 
-
-	//var zigzag = [intendedcals * 1.4, intendedcals * 0.5, intendedcals * 1.2, intendedcals * 0.9, intendedcals * 1.3, intendedcals * 0.7, intendedcals];
-
-	//var fivetwolow = TDEE * 0.25;
-
 	var idealweightrange = 'Your current weight is ' + weight + ' lbs. Your ideal weight range is between ' + Math.round( idealweightlow * 10) / 10 + ' lbs and ' + Math.round( idealweighthigh * 10) / 10 + ' lbs.<br>';
 	var BMIresults = 'Your current BMI is ' + Math.round( BMI * 10) / 10 + '. To achieve your goal BMI of ' + goalBMI + ' you would need to weigh ' + Math.round( goalBMIresult * 10) / 10 + ' lbs.<br>';
 	var BMRresults =  'Your BMR is ' + Math.round( BMR ) + ' calories per day.<br>';
 	var TDEEresults = 'Your TDEE is ' + Math.round( TDEE ) + ' calories per day.<br>';
 	var tolose = 'To lose 0.5 lbs per week, consume ' + Math.round( lose1 ) + ' calories per day.<br> To lose 1 lb per week, consume ' + Math.round( lose2 ) + ' calories per day.<br>To lose 2 lbs per week, consume ' + Math.round( lose3 ) + ' calories per day.<br>';
 	
-	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.';
+	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.<br>';
+	
+	var zigzag = 'Zig Zag Diet Planner<br>Day 1 calories: ' + intendedcals * 1.4 + '<br>Day 2 calories: ' + intendedcals * 0.5 + '<br>Day 3 calories: ' + intendedcals * 1.2 + '<br>Day 4 calories: ' + intendedcals * 0.9 + '<br>Day 5 calories: ' + intendedcals * 1.3 + '<br>Day 6 calories: ' + intendedcals * 0.7 + '<br>Day 7 calories: ' + intendedcals + '<br>';
+
+	var fivetwo = '5:2 Diet Planner<br>Two low calorie days of ' + Math.round(TDEE * 0.25) + ' calories per day<br>Five normal calorie days of ' + Math.round(TDEE) + ' calories per day.<br>'; 
 
 
-	var results = idealweightrange + BMIresults + BMRresults + TDEEresults + tolose + predictor;
+
+	var results = 'height is:' + height + '<br><br>' + idealweightrange + BMIresults + BMRresults + TDEEresults + tolose + predictor + zigzag + fivetwo;
 
 
 	document.getElementById('results').innerHTML = results;
