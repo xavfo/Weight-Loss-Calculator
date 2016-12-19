@@ -21,8 +21,7 @@ document.getElementById('submit').onclick = function(){
 	var intendedcals = 1000; //document.getElementById('intendedcals').value;
 	
 	// TODO how to handle dates?
-	var dateinput = document.getElementById('finishdate').value;
-	var finishdate = new Date(dateinput);
+	var finishdate = new Date(document.getElementById('finishdate').value);
 
 	var goalweight = 99; //document.getElementById('goalweight').value;
 	var goalBMI = 19; //document.getElementById('goalBMI').value;
@@ -38,10 +37,13 @@ document.getElementById('submit').onclick = function(){
 
 	var height = feet * 12 + inches;
 
-	var idealweightlow = ((18.5 * (height * height)) / 703); //lower limit healthy bmi, adjusted by framesize
-	var idealweighthigh = ((25 * (height * height)) / 703); //upper limit healthy bmi, adjusted by framesize
+	var idealweightlow = ((18.5 * (height * height)) / 703); //lower limit healthy bmi
+	var idealweighthigh = ((25 * (height * height)) / 703); //upper limit healthy bmi
 	var BMI = ((weight / (height * height)) * 703);
+	
 	var adjustedbmi;
+
+// TODO what and how will adjustedbmi affect results?
 
 	switch(framesize) {
 		case 0.9:
@@ -71,14 +73,20 @@ document.getElementById('submit').onclick = function(){
 	var lose3 = TDEE - 1000; //lose 2lbs p/w
 
 
-	//Math.round( number * 10 ) / 10;
-
 	var deficit = TDEE - intendedcals;
-	var daystogoal = ((weight - goalweight) * 3500) / deficit; //how many days until goal weight is reached, based on intended calorie intake
-	var dategoalreached; // TODO, calculate from daystogoal
 
-	var finishdateweight = weight - ((deficit * daystogoal) /3500); // loss in lbs by desired finish date
-	var calstoreachgoal = TDEE - (((weight - goalweight) * 3500) / daystogoal); // to reach goal by desired date, you'd need to consume this many cals per day
+	var todaysdate = new Date();
+
+	var daystofinishdate = ( (finishdate.getTime() / 86400000) - (todaysdate.getTime() / 86400000));
+	var daystoreachgoal = ((weight - goalweight) * 3500) / deficit;
+
+	var dategoalreached = new Date();
+  dategoalreached.setTime( dategoalreached.getTime () + daystoreachgoal * 86400000);
+
+  	var finishdateweight = weight - ((deficit * daystofinishdate) /3500); 
+
+  	var calstoreachgoal = 1500 - (((weight - goalweight) * 3500) / daystofinishdate);
+
 
 	//var zigzag = [intendedcals * 1.4, intendedcals * 0.5, intendedcals * 1.2, intendedcals * 0.9, intendedcals * 1.3, intendedcals * 0.7, intendedcals];
 
@@ -89,7 +97,8 @@ document.getElementById('submit').onclick = function(){
 	var BMRresults =  'Your BMR is ' + Math.round( BMR ) + ' calories per day.<br>';
 	var TDEEresults = 'Your TDEE is ' + Math.round( TDEE ) + ' calories per day.<br>';
 	var tolose = 'To lose 0.5 lbs per week, consume ' + Math.round( lose1 ) + ' calories per day.<br> To lose 1 lb per week, consume ' + Math.round( lose2 ) + ' calories per day.<br>To lose 2 lbs per week, consume ' + Math.round( lose3 ) + ' calories per day.<br>';
-	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will weigh ' + finishdateweight + ' lbs on ' + finishdate + '.<br>You would reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached + '.<br>To weigh ' + goalweight + ' lbs on ' + finishdate + ' you should consume ' + calstoreachgoal + ' calories per day.<br>';
+	
+	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.';
 
 
 	var results = idealweightrange + BMIresults + BMRresults + TDEEresults + tolose + predictor;
