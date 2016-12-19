@@ -1,6 +1,15 @@
 //WLC
 
-
+function writedate(dateinput) {
+  
+  var date = dateinput.getDate();
+  var month = dateinput.getMonth() + 1;
+  var year = dateinput.getFullYear();
+  
+  var date = date + '/' + month + '/' + year;
+  return date;
+  
+} 
 
 document.getElementById('submit').onclick = function(){
 
@@ -98,7 +107,7 @@ document.getElementById('submit').onclick = function(){
 	var TDEEresults = 'Your TDEE is ' + Math.round( TDEE ) + ' calories per day.<br>';
 	var tolose = 'To lose 0.5 lbs per week, consume ' + Math.round( lose1 ) + ' calories per day.<br> To lose 1 lb per week, consume ' + Math.round( lose2 ) + ' calories per day.<br>To lose 2 lbs per week, consume ' + Math.round( lose3 ) + ' calories per day.<br>';
 	
-	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.';
+	var predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.';
 
 
 	var results = idealweightrange + BMIresults + BMRresults + TDEEresults + tolose + predictor;
