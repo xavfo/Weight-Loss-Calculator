@@ -82,16 +82,18 @@ document.getElementById('submit').onclick = function(){
 	var lose2 = TDEE - 500; //lose 1lb p/w
 	var lose3 = TDEE - 1000; //lose 2lbs p/w
 
-	var daystofinishdate = ( (finishdate.getTime() / 86400000) - (new Date().getTime() / 86400000));
-	
-	var daystoreachgoal = ((weight - goalweight) * 3500) / (TDEE - intendedcals);
+	var today = new Date();
 
+	var daystofinishdate = (finishdate.getTime() / 86400000) - (today.getTime() / 86400000);
+
+	var daystoreachgoal = ((weight - goalweight) * 3500) / (TDEE - intendedcals);
 	var dategoalreached = new Date();
-  dategoalreached.setTime( dategoalreached.getTime () + daystoreachgoal * 86400000);
+
+  	dategoalreached.setTime(today.getTime() + (daystoreachgoal * 86400000));
 
   	var finishdateweight = weight - (((TDEE - intendedcals) * daystofinishdate) /3500); 
 
-  	var calstoreachgoal = 1500 - (((weight - goalweight) * 3500) / daystofinishdate);
+  	var calstoreachgoal = TDEE - (((weight - goalweight) * 3500) / daystofinishdate);
 
 	var idealweightrange = 'Your current weight is ' + weight + ' lbs. Your ideal weight range is between ' + Math.round( idealweightlow * 10) / 10 + ' lbs and ' + Math.round( idealweighthigh * 10) / 10 + ' lbs.<br>';
 	
