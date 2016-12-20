@@ -1,6 +1,6 @@
 //WLC
 document.getElementById('results').style.display = 'none';
-document.getElementById('backbuttons').style.display = 'none';
+document.getElementById('back').style.display = 'none';
 
 	function checkreqs() {
 
@@ -82,18 +82,14 @@ document.getElementById('submit').onclick = function(){
 	var lose2 = TDEE - 500; //lose 1lb p/w
 	var lose3 = TDEE - 1000; //lose 2lbs p/w
 
-
-	var deficit = TDEE - intendedcals;
-
-	var todaysdate = new Date();
-
-	var daystofinishdate = ( (finishdate.getTime() / 86400000) - (todaysdate.getTime() / 86400000));
-	var daystoreachgoal = ((weight - goalweight) * 3500) / deficit;
+	var daystofinishdate = ( (finishdate.getTime() / 86400000) - (new Date().getTime() / 86400000));
+	
+	var daystoreachgoal = ((weight - goalweight) * 3500) / (TDEE - intendedcals);
 
 	var dategoalreached = new Date();
   dategoalreached.setTime( dategoalreached.getTime () + daystoreachgoal * 86400000);
 
-  	var finishdateweight = weight - ((deficit * daystofinishdate) /3500); 
+  	var finishdateweight = weight - (((TDEE - intendedcals) * daystofinishdate) /3500); 
 
   	var calstoreachgoal = 1500 - (((weight - goalweight) * 3500) / daystofinishdate);
 
@@ -128,14 +124,31 @@ document.getElementById('submit').onclick = function(){
 	else {
 			predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.<br>';
 	}
-	
-	var zigzag = 'Zig Zag Diet Planner<br>Day 1 calories: ' + intendedcals * 1.4 + '<br>Day 2 calories: ' + intendedcals * 0.5 + '<br>Day 3 calories: ' + intendedcals * 1.2 + '<br>Day 4 calories: ' + intendedcals * 0.9 + '<br>Day 5 calories: ' + intendedcals * 1.3 + '<br>Day 6 calories: ' + intendedcals * 0.7 + '<br>Day 7 calories: ' + intendedcals + '<br>';
+
+	var zigzag;
+	var macros;
+	if (intendedcals === '') {
+		zigzag = '';
+		macros = '';
+	}
+	else {
+			zigzag = 'Zig Zag Diet Planner<br>Day 1 calories: ' + intendedcals * 1.4 + '<br>Day 2 calories: ' + intendedcals * 0.5 + '<br>Day 3 calories: ' + intendedcals * 1.2 + '<br>Day 4 calories: ' + intendedcals * 0.9 + '<br>Day 5 calories: ' + intendedcals * 1.3 + '<br>Day 6 calories: ' + intendedcals * 0.7 + '<br>Day 7 calories: ' + intendedcals + '<br>';
+
+
+			var losefat = 'To lose fat:<br>' + Math.round(intendedcals * 0.2) + ' calories or ' + Math.round((intendedcals * 0.2) / 4) + ' grams of carbohydrate per day.<br>' + Math.round(intendedcals * 0.45) + ' calories or ' + Math.round((intendedcals * 0.45) / 4) + ' grams of protein per day.<br>' + Math.round(intendedcals * 0.35) + 'calories or ' + Math.round((intendedcals * 0.35) / 9) + ' grams of fat per day.<br>';
+
+			var maintain = 'To maintain:<br>' + Math.round(intendedcals * 0.4) + ' calories or ' + Math.round((intendedcals * 0.4) / 4) + ' grams of carbohydrate per day.<br>' + Math.round(intendedcals * 0.3) + ' calories or ' + Math.round((intendedcals * 0.3) / 4) + ' grams of protein per day.<br>' + Math.round(intendedcals * 0.3) + 'calories or ' + Math.round((intendedcals * 0.3) / 9) + ' grams of fat per day.<br>';
+
+
+			var buildmuscle = 'To build muscle:<br>' + Math.round(intendedcals * 0.5) + ' calories or ' + Math.round((intendedcals * 0.5) / 4) + ' grams of carbohydrate per day.<br>' + Math.round(intendedcals * 0.3) + ' calories or ' + Math.round((intendedcals * 0.3) / 4) + ' grams of protein per day.<br>' + Math.round(intendedcals * 0.2) + 'calories or ' + Math.round((intendedcals * 0.2) / 9) + ' grams of fat per day.<br>';
+
+			macros = 'Macro Planner<br>' + losefat + maintain + buildmuscle + '<br>';
+	}
 
 	var fivetwo = '5:2 Diet Planner<br>Two low calorie days of ' + Math.round(TDEE * 0.25) + ' calories per day<br>Five normal calorie days of ' + Math.round(TDEE) + ' calories per day.<br>'; 
 
 
-
-	var results = idealweightrange + BMIresults + goalBMIresults + BMRresults + TDEEresults + tolose + predictor + zigzag + fivetwo;
+	var results = idealweightrange + BMIresults + goalBMIresults + BMRresults + TDEEresults + tolose + predictor + zigzag + fivetwo + macros;
 
 
 	document.getElementById('results').innerHTML = results;
@@ -143,17 +156,17 @@ document.getElementById('submit').onclick = function(){
 	
 	document.getElementById('input').style.display = 'none';
 	document.getElementById('results').style.display = 'block';
-	document.getElementById('backbuttons').style.display = 'block';
+	document.getElementById('back').style.display = 'block';
 }
 };
 
 document.getElementById('back').onclick = function() {
 	document.getElementById('input').style.display = 'block';
 	document.getElementById('results').style.display = 'none';
-	document.getElementById('backbuttons').style.display = 'none';
+	document.getElementById('back').style.display = 'none';
 };
 
 //reloads everything
-document.getElementById('reset').onclick = function(){
+document.getElementById('clear').onclick = function(){
   history.go(0);
 };
