@@ -123,8 +123,17 @@ document.getElementById('submit').onclick = function(){
 	if (intendedcals === '' || goalweight === '' || finishdate === '') {
 		predictor = '';
 	}
-	else {
-			predictor = 'If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.<br>';
+	else {	
+			var predict;
+			if (dategoalreached.getTime() < today.getTime()) {
+				predict = ' calories per day, you will never reach your goal weight of ' + goalweight + ' lbs';
+			}
+			else {
+				predict = ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString();
+			}
+
+
+			predictor = 'If you consume ' + intendedcals + predict + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.<br>';
 	}
 
 	var zigzag;
