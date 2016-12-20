@@ -96,7 +96,7 @@
 			<div class="formelement">
 			<!--goal weight number input-->
 			Goal Weight
-			<input type="number" id="goalweight" name="goalweight">Lbs
+			<input type="number" id="goalweight" name="goalweight">kg
 			</div>
 		
 			<div class="formelement">
