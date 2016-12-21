@@ -29,11 +29,11 @@
 
 <div id="input">
 
-	<div class="calheader">Welcome to the Ultimate Weightloss Calculator</div>
+	<div class="calheader"><h3>Welcome to the Ultimate Weightloss Calculator</h3></div>
 	<div class="content">
 		<div class="caltext"><a href="index.php">If you prefer LBS, FEET AND INCHES, click here for the imperial version.</a></div>
 		<div class="fieldcontainer">
-			<div class="caltext">Please complete all fields in this section.</div>
+			<div class="caltext"><h4>Please complete all fields in this section.</h4></div>
 			<form id="requiredfields">
 
 			<div class="formelement">
@@ -78,7 +78,7 @@
 		</div>
 
 		<div class="fieldcontainer">
-		<div class="caltext">Optional for more detailed results - it's ok to leave some or all of these blank.</div>
+		<div class="caltext"><h4>Optional fields - it's ok to leave some or all of these blank, but you'll get more interesting results if you fill them all in!</h4></div>
 			<form id="optionalfields">
 
 			<div class="formelement">
