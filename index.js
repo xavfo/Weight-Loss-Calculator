@@ -13,6 +13,8 @@ function checkreqs() {
     return true;
 }
 
+
+
 document.getElementById('submit').onclick = function() {
 
     if (!checkreqs()) {
@@ -36,10 +38,24 @@ document.getElementById('submit').onclick = function() {
 
         // TODO how to handle dates?
         var finishdate = new Date(document.getElementById('finishdate').value);
+        var today = new Date();
 
         var goalweight = document.getElementById('goalweight').value;
         var goalBMI = document.getElementById('goalBMI').value;
         var framesize = document.getElementById('framesize').value;
+
+        //checks user's input
+
+        if (today.getTime() > finishdate.getTime()) {
+            alert('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
+            return false;
+        } else if (inches > 11) {
+            alert('Inches cannot be more than 11');
+            return false;
+        } else if (goalBMI < 1) {
+            alert('Goal BMI cannot be negative.');
+            return false;
+        }
 
 
         var height = (Number(feet) * 12) + Number(inches);
@@ -80,8 +96,7 @@ document.getElementById('submit').onclick = function() {
         var lose1 = TDEE - 250; //lose 0.5lbs per week
         var lose2 = TDEE - 500; //lose 1lb p/w
         var lose3 = TDEE - 1000; //lose 2lbs p/w
-
-        var today = new Date();
+    
 
         var daystofinishdate = (finishdate.getTime() / 86400000) - (today.getTime() / 86400000);
 
@@ -105,7 +120,7 @@ document.getElementById('submit').onclick = function() {
 
         var tolose = '<div class="result">To lose 0.5 lbs per week, consume ' + Math.round(lose1) + ' calories per day.<br> To lose 1 lb per week, consume ' + Math.round(lose2) + ' calories per day.<br>To lose 2 lbs per week, consume ' + Math.round(lose3) + ' calories per day.</div>';
 
-        //optionals 
+
 
 
 
@@ -132,6 +147,38 @@ document.getElementById('submit').onclick = function() {
 
             predictor = '<div class="result">If you consume ' + intendedcals + predict + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
         }
+
+        // TODO
+        /*
+        var predictgoaldate; 
+
+        if (intendedcals === '' || goalweight === '') {
+            predictgoaldate = '';
+        } else if (dategoalreached.getTime() < today.getTime()) {
+                predictgoaldate = '<div class="result">If you consume ' + intendedcals +' calories per day, you will never reach your goal weight of ' + goalweight + ' lbs' + '.</div>';
+            } else {
+                predictgoaldate = '<div class="result">If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.</div>';
+            }
+
+            var predictweightondate;
+
+            if (intendedcals === '' || finishdate === '') {
+                predictweightondate = '';
+            } else {
+                predictweightondate = '<div class="result">On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.</div>';
+            }
+
+            var toreachgoal;
+            if (finishdate === '' || goalweight === '') {
+                toreachgoal = '';
+            } else {
+                toreachgoal = '<div class="result">To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
+            }
+
+           var predictor = predictgoaldate + predictweightondate + toreachgoal;
+           */
+
+        
 
         var zigzag;
         var macros;

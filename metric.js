@@ -35,11 +35,18 @@ document.getElementById('submitmetric').onclick = function() {
 
         // TODO how to handle dates?
         var finishdate = new Date(document.getElementById('finishdate').value);
+        var today = new Date();
 
         var goalweight = document.getElementById('goalweight').value;
         var goalBMI = document.getElementById('goalBMI').value;
         var framesize = document.getElementById('framesize').value;
 
+        //checks user's input
+
+        if (today.getTime() > finishdate.getTime()) {
+            alert('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
+            return false;
+        }
         var frame1; // for calculating adjusted bmi
         var frame2; // for calculating adjusted goalbmi and ideal weight range
 
@@ -77,8 +84,6 @@ document.getElementById('submitmetric').onclick = function() {
         var lose2 = TDEE - 551; //lose 0.5kg p/w
         var lose3 = TDEE - 1102; //lose 1kg p/w
 
-        var today = new Date();
-
         var daystofinishdate = (finishdate.getTime() / 86400000) - (today.getTime() / 86400000);
 
         var daystoreachgoal = ((weight - goalweight) * 7716) / (TDEE - intendedcals);
@@ -90,7 +95,7 @@ document.getElementById('submitmetric').onclick = function() {
 
         var calstoreachgoal = TDEE - (((weight - goalweight) * 7716) / daystofinishdate);
 
-        var idealweightrange = '<div class="result">Your current weight is <h3>' + weight + ' kg.<br>Your ideal weight range is between ' + Math.round(idealweightlow * 10) / 10 + ' kg and ' + Math.round(idealweighthigh * 10) / 10 + ' kg.</div>';
+        var idealweightrange = '<div class="result">Your current weight is ' + weight + ' kg.<br>Your ideal weight range is between ' + Math.round(idealweightlow * 10) / 10 + ' kg and ' + Math.round(idealweighthigh * 10) / 10 + ' kg.</div>';
 
         var BMIresults = '<div class="result">Your current BMI is ' + Math.round(BMI * 10) / 10 + '.</div>';
 
@@ -127,6 +132,8 @@ document.getElementById('submitmetric').onclick = function() {
 
             predictor = '<div class="result">If you consume ' + intendedcals + predict + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' kg.<br>To weigh ' + goalweight + ' kg on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
         }
+        
+
 
         var zigzag;
         var macros;
