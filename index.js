@@ -23,7 +23,7 @@ document.getElementById('submit').onclick = function() {
 
 
         //required
-        var gender = "female"; //document.getElementsByName('gender');
+        var gender = document.getElementsByName('gender');
 
         var age = document.getElementById('age').value;
         var weight = document.getElementById('lbs').value;
