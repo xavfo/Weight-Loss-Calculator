@@ -21,7 +21,13 @@ document.getElementById('submitmetric').onclick = function() {
 
 
         //required
-        var gender = document.getElementsByName('gender');
+        var gender;
+
+        if (document.getElementById('f').checked) {
+            gender = 'female';
+        } else {
+            gender = 'male';
+        }
 
         var age = document.getElementById('age').value;
         var weight = document.getElementById('kg').value;

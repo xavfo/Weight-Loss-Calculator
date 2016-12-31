@@ -23,7 +23,15 @@ document.getElementById('submit').onclick = function() {
 
 
         //required
-        var gender = document.getElementsByName('gender');
+        var gender;
+
+        if (document.getElementById('f').checked) {
+            gender = 'female';
+        } else {
+            gender = 'male';
+        }
+
+
 
         var age = document.getElementById('age').value;
         var weight = document.getElementById('lbs').value;
@@ -51,9 +59,6 @@ document.getElementById('submit').onclick = function() {
             return false;
         } else if (inches > 11) {
             alert('Inches cannot be more than 11');
-            return false;
-        } else if (goalBMI < 1) {
-            alert('Goal BMI cannot be negative.');
             return false;
         }
 
