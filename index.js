@@ -137,24 +137,8 @@ document.getElementById('submit').onclick = function() {
             goalBMIresults = '<div class="result">To achieve your goal BMI of ' + goalBMI + ' you would need to weigh ' + Math.round(goalBMIresult * 10) / 10 + ' lbs.</div>';
         }
 
-        //predictor
-        var predictor;
-        if (intendedcals === '' || goalweight === '' || finishdate === '') {
-            predictor = '';
-        } else {
-            var predict;
-            if (dategoalreached.getTime() < today.getTime()) {
-                predict = ' calories per day, you will never reach your goal weight of ' + goalweight + ' lbs';
-            } else {
-                predict = ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString();
-            }
 
-
-            predictor = '<div class="result">If you consume ' + intendedcals + predict + '.<br>On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.<br>To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
-        }
-
-        // TODO
-        /*
+        /////////////// NEW PREDICTOR
         var predictgoaldate; 
 
         if (intendedcals === '' || goalweight === '') {
@@ -167,22 +151,22 @@ document.getElementById('submit').onclick = function() {
 
             var predictweightondate;
 
-            if (intendedcals === '' || finishdate === '') {
+            if (intendedcals === '' || isNaN(finishdate)) { // check if finish date is valid
                 predictweightondate = '';
             } else {
-                predictweightondate = '<div class="result">On ' + finishdate.toDateString() + ' you would weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.</div>';
+                predictweightondate = '<div class="result">If you consume ' + intendedcals + ' calories per day, on ' + finishdate.toDateString() + ' you will weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.</div>';
             }
 
             var toreachgoal;
-            if (finishdate === '' || goalweight === '') {
+            if (isNaN(finishdate) || goalweight === '') {
                 toreachgoal = '';
             } else {
                 toreachgoal = '<div class="result">To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
             }
 
            var predictor = predictgoaldate + predictweightondate + toreachgoal;
-           */
 
+           /////////////// 
         
 
         var zigzag;
