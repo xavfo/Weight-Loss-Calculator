@@ -161,8 +161,8 @@ document.getElementById('submitmetric').onclick = function() {
             zigzag = '';
             macros = '';
         } else {
-            zigzag = '<div class="result">Zig Zag Diet Planner<br><br>Day 1 calories: ' + intendedcals * 1.4 + '<br>Day 2 calories: ' + intendedcals * 0.5 + '<br>Day 3 calories: ' + intendedcals * 1.2 + '<br>Day 4 calories: ' + intendedcals * 0.9 + '<br>Day 5 calories: ' + intendedcals * 1.3 + '<br>Day 6 calories: ' + intendedcals * 0.7 + '<br>Day 7 calories: ' + intendedcals + '</div>';
-
+            
+            zigzag = '<div class="result">Zig Zag Diet Planner<br><br>Day 1 calories: ' + Math.round(intendedcals * 1.4) + '<br>Day 2 calories: ' + Math.round(intendedcals * 0.5) + '<br>Day 3 calories: ' + Math.round(intendedcals * 1.2) + '<br>Day 4 calories: ' + Math.round(intendedcals * 0.9) + '<br>Day 5 calories: ' + Math.round(intendedcals * 1.3) + '<br>Day 6 calories: ' + Math.round(intendedcals * 0.7) + '<br>Day 7 calories: ' + Math.round(intendedcals) + '</div>';
 
             var losefat = '<br>Low Carb:<br><br>' + Math.round(intendedcals * 0.2) + ' calories or ' + Math.round((intendedcals * 0.2) / 4) + ' grams of carbohydrate per day.<br>' + Math.round(intendedcals * 0.45) + ' calories or ' + Math.round((intendedcals * 0.45) / 4) + ' grams of protein per day.<br>' + Math.round(intendedcals * 0.35) + 'calories or ' + Math.round((intendedcals * 0.35) / 9) + ' grams of fat per day.<br>';
 
