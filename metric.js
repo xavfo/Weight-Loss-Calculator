@@ -16,7 +16,7 @@ function checkreqs() {
 document.getElementById('submitmetric').onclick = function() {
 
     if (!checkreqs()) {
-        alert('Please fill in all the required fields.');
+        alertbox('Please fill in all the required fields.');
     } else {
 
 
@@ -50,7 +50,7 @@ document.getElementById('submitmetric').onclick = function() {
         //checks user's input
 
         if (today.getTime() > finishdate.getTime()) {
-            alert('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
+            alertbox('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
             return false;
         }
         var frame1; // for calculating adjusted bmi
@@ -202,3 +202,13 @@ document.getElementById('back').onclick = function() {
 document.getElementById('clear').onclick = function() {
     history.go(0);
 };
+
+
+
+function alertbox(alert) {
+    document.body.scrollTop = document.documentElement.scrollTop = 200;
+    var alertbox = document.getElementById('alertbox');
+    alertbox.innerHTML = alert;
+    alertbox.style.display = 'block';
+}
+

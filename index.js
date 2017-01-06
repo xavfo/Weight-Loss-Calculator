@@ -18,7 +18,7 @@ function checkreqs() {
 document.getElementById('submit').onclick = function() {
 
     if (!checkreqs()) {
-        alert('Please fill in all the required fields.');
+        alertbox('Please fill in all the required fields.');
     } else {
 
 
@@ -55,10 +55,10 @@ document.getElementById('submit').onclick = function() {
         //checks user's input
 
         if (today.getTime() > finishdate.getTime()) {
-            alert('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
+            alertbox('I wish I had a time machine too, but unfortunately your finish date cannot be in the past.');
             return false;
         } else if (inches > 11) {
-            alert('Inches cannot be more than 11');
+            alertbox('Inches cannot be more than 11');
             return false;
         }
 
@@ -101,7 +101,7 @@ document.getElementById('submit').onclick = function() {
         var lose1 = TDEE - 250; //lose 0.5lbs per week
         var lose2 = TDEE - 500; //lose 1lb p/w
         var lose3 = TDEE - 1000; //lose 2lbs p/w
-    
+
 
         var daystofinishdate = (finishdate.getTime() / 86400000) - (today.getTime() / 86400000);
 
@@ -139,35 +139,35 @@ document.getElementById('submit').onclick = function() {
 
 
         /////////////// NEW PREDICTOR
-        var predictgoaldate; 
+        var predictgoaldate;
 
         if (intendedcals === '' || goalweight === '') {
             predictgoaldate = '';
         } else if (dategoalreached.getTime() < today.getTime()) {
-                predictgoaldate = '<div class="result pre">If you consume ' + intendedcals +' calories per day, you will never reach your goal weight of ' + goalweight + ' lbs' + '.</div>';
-            } else {
-                predictgoaldate = '<div class="result pre">If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.</div>';
-            }
+            predictgoaldate = '<div class="result pre">If you consume ' + intendedcals + ' calories per day, you will never reach your goal weight of ' + goalweight + ' lbs' + '.</div>';
+        } else {
+            predictgoaldate = '<div class="result pre">If you consume ' + intendedcals + ' calories per day, you will reach your goal weight of ' + goalweight + ' lbs on ' + dategoalreached.toDateString() + '.</div>';
+        }
 
-            var predictweightondate;
+        var predictweightondate;
 
-            if (intendedcals === '' || isNaN(finishdate)) { // check if finish date is valid
-                predictweightondate = '';
-            } else {
-                predictweightondate = '<div class="result pre">If you consume ' + intendedcals + ' calories per day, on ' + finishdate.toDateString() + ' you will weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.</div>';
-            }
+        if (intendedcals === '' || isNaN(finishdate)) { // check if finish date is valid
+            predictweightondate = '';
+        } else {
+            predictweightondate = '<div class="result pre">If you consume ' + intendedcals + ' calories per day, on ' + finishdate.toDateString() + ' you will weigh ' + Math.round(finishdateweight * 10) / 10 + ' lbs.</div>';
+        }
 
-            var toreachgoal;
-            if (isNaN(finishdate) || goalweight === '') {
-                toreachgoal = '';
-            } else {
-                toreachgoal = '<div class="result pre">To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
-            }
+        var toreachgoal;
+        if (isNaN(finishdate) || goalweight === '') {
+            toreachgoal = '';
+        } else {
+            toreachgoal = '<div class="result pre">To weigh ' + goalweight + ' lbs on ' + finishdate.toDateString() + ' you would need to consume ' + Math.round(calstoreachgoal) + ' calories per day.</div>';
+        }
 
-           var predictor = predictgoaldate + predictweightondate + toreachgoal;
+        var predictor = predictgoaldate + predictweightondate + toreachgoal;
 
-           /////////////// 
-        
+        /////////////// 
+
 
         var zigzag;
         var macros;
@@ -217,3 +217,14 @@ document.getElementById('back').onclick = function() {
 document.getElementById('clear').onclick = function() {
     history.go(0);
 };
+
+
+
+function alertbox(alert) {
+    document.body.scrollTop = document.documentElement.scrollTop = 200;
+    var alertbox = document.getElementById('alertbox');
+    alertbox.innerHTML = alert;
+    alertbox.style.display = 'block';
+
+}
+
