@@ -187,7 +187,7 @@ document.getElementById('submitmetric').onclick = function() {
         document.getElementById('input').style.display = 'none';
         document.getElementById('results').style.display = 'block';
         document.getElementById('back').style.display = 'block';
-        window.scrollTo(0, 0);
+        document.body.scrollTop = document.documentElement.scrollTop = 200;
     }
 };
 
@@ -195,7 +195,7 @@ document.getElementById('back').onclick = function() {
     document.getElementById('input').style.display = 'block';
     document.getElementById('results').style.display = 'none';
     document.getElementById('back').style.display = 'none';
-    window.scrollTo(0, 0);
+    document.body.scrollTop = document.documentElement.scrollTop = 200;
 };
 
 //reloads everything
